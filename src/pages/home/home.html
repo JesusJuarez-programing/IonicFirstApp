@@ -1,17 +1,32 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-title>Principal</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h2>Welcome to Ionic!</h2>
+  <h2>Calculadora de propinas</h2>
   <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
+    Ingrese el costo del servicio y % de propina
   </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+  <ion-list>
+    <ion-item>
+      <ion-label fixed>Costo</ion-label>
+      <ion-input type="text" value="" [(ngModel)]="costo"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label fixed>Propina</ion-label>>
+      <ion-label>{{propina}}%</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <button ion-button color ="light" itemm-end (click)="CalcularPropina()">Calcular</button>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>${{totalPropina}}</ion-label>
+      <ion-label>${{totalGlobal}}</ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>
