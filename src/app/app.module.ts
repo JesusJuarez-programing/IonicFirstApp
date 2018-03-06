@@ -10,9 +10,14 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { FavoritesPage } from '../pages/favorites/favorites';
 import { FavoritesModalPage } from '../pages/favorites/favorites-modal/favorites-modal';
+import { FavoritesService } from './../pages/favorites/favorites.service';
+import { Config } from '../config';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -27,6 +32,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    HttpModule,
+    AngularFireModule.initializeApp(Config.firebase),
+    AngularFireDatabaseModule,
     IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
@@ -42,6 +50,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
+    FavoritesService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
