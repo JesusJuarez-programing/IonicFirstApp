@@ -12,7 +12,7 @@ export class FavoritesService{
     constructor(http: Http, private db: AngularFireDatabase){
         
     }
-        GetAllFavorites(){
+        GetAllFavoritesAF(){
             return this.restaurantsListRef;
         }
 

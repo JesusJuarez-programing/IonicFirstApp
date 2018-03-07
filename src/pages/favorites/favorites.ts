@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angu
 import { FavoritesModalPage } from '../favorites/favorites-modal/favorites-modal';
 import { FavoritesService } from './favorites.service';
 import { Favorite } from './models/favorites';
+import { AngularFireList } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
 /**
  * Generated class for the FavoritesPage page.
  *
@@ -18,16 +20,25 @@ import { Favorite } from './models/favorites';
 export class FavoritesPage {
   private favoritesService: FavoritesService;
   private favorites: Favorite[];
+  favoritesList$: Observable<Favorite[]>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, _favoritesService: FavoritesService) {
     this.favoritesService = _favoritesService;
-    this.favorites = this.favoritesService.GetAllFavorites();
+    this.favoritesList$ = this.favoritesService
+    .GetAllFavoritesAF()
+    .snapshotChanges()
+    .map(
+      changes =>{
+        return changes.map(c => ({
+          key: c.payload.key, ...c.payload.val()
+        }))
+      }
+    );
     console.log(this.favorites);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FavoritesPage');
-    this.favorites = this.favoritesService.GetAllFavorites();
   }
 
   OnNew(){
