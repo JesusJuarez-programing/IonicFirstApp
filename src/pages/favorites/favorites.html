@@ -19,7 +19,7 @@
         <div class="card-title">{{favorite.nombre}}</div>
         <div class="card-subtitle">{{favorite.direccion}}</div>
         <ion-icon name="refresh" (click)="OnUpdate(favorite)"></ion-icon>
-        <ion-icon name="trash" (click)="OnDelete(favorite)"></ion-icon>
+        <ion-icon name="trash" (click)="presentConfirm(favorite)"></ion-icon>
       </ion-card>
     </ion-item>
   </ion-list>

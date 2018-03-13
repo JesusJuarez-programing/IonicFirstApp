@@ -5,6 +5,7 @@ import { FavoritesService } from './favorites.service';
 import { Favorite } from './models/favorites';
 import { AngularFireList } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
+import { AlertController } from 'ionic-angular';
 /**
  * Generated class for the FavoritesPage page.
  *
@@ -22,7 +23,7 @@ export class FavoritesPage {
   private favorites: Favorite[];
   favoritesList$: Observable<Favorite[]>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, _favoritesService: FavoritesService) {
+  constructor(public navCtrl: NavController, private alertCtrl: AlertController, public navParams: NavParams, public modalCtrl: ModalController, _favoritesService: FavoritesService) {
     this.favoritesService = _favoritesService;
     this.favoritesList$ = this.favoritesService
     .GetAllFavoritesAF()
@@ -51,6 +52,7 @@ export class FavoritesPage {
   OnDelete(restaurant: Favorite){
     console.log(restaurant.key);
     //Colocar mensaje de confirmacion
+    //presentConfirm();
     this.favoritesService.DeleteFavoriteAF(restaurant.key);
   }
 
@@ -58,4 +60,29 @@ export class FavoritesPage {
     let modal = this.modalCtrl.create(FavoritesModalPage, {restaurant: restaurant});
     modal.present();
   }
+
+  presentConfirm(restaurant: Favorite) {
+    let alert = this.alertCtrl.create({
+      title: 'Eliminar Restaurant',
+      message: '¿Seguro que deseas elimiarlo?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Aceptar',
+          handler: () => {
+            console.log('Eliminado');
+            this.favoritesService.DeleteFavoriteAF(restaurant.key);
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
 }

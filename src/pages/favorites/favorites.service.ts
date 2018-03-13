@@ -2,7 +2,6 @@ import { Favorite } from './models/favorites';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
-//import { FAVORITES } from './data/data-favorites';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
 @Injectable()
