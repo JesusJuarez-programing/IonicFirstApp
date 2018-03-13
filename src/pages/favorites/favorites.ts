@@ -42,8 +42,20 @@ export class FavoritesPage {
   }
 
   OnNew(){
-    let modal = this.modalCtrl.create(FavoritesModalPage);
+    let newRestaurant: Favorite = {nombre: '', direccion: ''}
+    let modal = this.modalCtrl.create(FavoritesModalPage, {restaurant: newRestaurant});
     console.log(modal);
+    modal.present();
+  }
+
+  OnDelete(restaurant: Favorite){
+    console.log(restaurant.key);
+    //Colocar mensaje de confirmacion
+    this.favoritesService.DeleteFavoriteAF(restaurant.key);
+  }
+
+  OnUpdate(restaurant: Favorite){
+    let modal = this.modalCtrl.create(FavoritesModalPage, {restaurant: restaurant});
     modal.present();
   }
 }

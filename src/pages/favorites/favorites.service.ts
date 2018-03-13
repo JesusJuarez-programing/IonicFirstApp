@@ -2,7 +2,7 @@ import { Favorite } from './models/favorites';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
-import { FAVORITES } from './data/data-favorites';
+//import { FAVORITES } from './data/data-favorites';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
 @Injectable()
@@ -18,5 +18,13 @@ export class FavoritesService{
 
         AddFavoriteAF(restaurant: Favorite){
             return this.restaurantsListRef.push(restaurant);
+        }
+
+        DeleteFavoriteAF(key:string){
+            return this.restaurantsListRef.remove(key);
+        }
+
+        UpdateFavoriteAF(key: string, restaurant: Favorite){
+            return this.restaurantsListRef.update(key, restaurant);
         }
     }

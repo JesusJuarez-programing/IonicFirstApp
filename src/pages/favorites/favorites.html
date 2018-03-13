@@ -1,9 +1,3 @@
-<!--
-  Generated template for the FavoritesPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
@@ -24,6 +18,8 @@
       <ion-card padding *ngFor="let favorite of favoritesList$ | async">
         <div class="card-title">{{favorite.nombre}}</div>
         <div class="card-subtitle">{{favorite.direccion}}</div>
+        <ion-icon name="refresh" (click)="OnUpdate(favorite)"></ion-icon>
+        <ion-icon name="trash" (click)="OnDelete(favorite)"></ion-icon>
       </ion-card>
     </ion-item>
   </ion-list>
